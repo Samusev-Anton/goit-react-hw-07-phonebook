@@ -9,7 +9,7 @@ import { BookBox } from './PhoneBook.styled';
 export const PhoneBook = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-  const contacts = useSelector(state => state.contacts);
+  // const contacts = useSelector(state => state.contacts);
   // console.log(contacts);
   useEffect(() => {
     if (!isLoggedIn) {
@@ -22,7 +22,7 @@ export const PhoneBook = () => {
       <h1 style={{ textAlign: 'center' }}>Phonebook</h1>
       <Form2 />
       <h2 style={{ textAlign: 'center' }}>Contacts</h2>
-      {contacts && <User />}
+      <User />
       <Filter />
     </BookBox>
   );

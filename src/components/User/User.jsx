@@ -1,24 +1,25 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { UserList, Delete, Elem, UserName } from './User.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeContact } from 'redux/formSlice';
+import { useSelector } from 'react-redux';
 import { AiFillPhone, AiFillSmile } from 'react-icons/ai';
+import { useGetContactsQuery } from 'redux/formSlice';
 
 const User = () => {
-  const contacts = useSelector(state => state.contacts);
-  const input = useSelector(state => state.filter);
-  // console.log({ contacts });
-  const dispatch = useDispatch();
+  const { data } = useGetContactsQuery();
+  console.log(data);
 
-  const filteredContacts = contacts.filter(contact =>
+  // const [deleteContact] = useDeleteContactMutation();
+  const input = useSelector(state => state.filter);
+
+  const filteredContacts = data.filter(contact =>
     contact.name.toLowerCase().includes(input.toLowerCase())
   );
   // console.log(filteredContacts);
 
   return (
     <UserList>
-      {filteredContacts.map(({ name, number, id }) => (
+      {filteredContacts.map(({ name, phone, id }) => (
         <UserName key={id}>
           <Elem>
             <AiFillSmile />
@@ -26,10 +27,13 @@ const User = () => {
           </Elem>
           <Elem>
             <AiFillPhone />
-            <span>{number}</span>
+            <span>{phone}</span>
           </Elem>
 
-          <button type="button" onClick={() => dispatch(removeContact(id))}>
+          <button
+            type="button"
+            // onClick={() => deleteContact(contacts.id)}
+          >
             <Delete />
           </button>
         </UserName>

@@ -2,13 +2,13 @@ import React from 'react';
 import { InputStyle, Submit, FormBox, Input } from './Form.styled';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/formSlice';
+import { useSelector } from 'react-redux';
+// import { addContact } from '../../redux/formSlice';
 
 const Form2 = () => {
   const [user, setUser] = useState('');
   const [number, setNumber] = useState('');
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const existContacts = useSelector(state => state.contacts);
 
   const handleInputChange = event => {
@@ -45,9 +45,9 @@ const Form2 = () => {
         existContact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    return checkContact
-      ? alert('такое имя уже есть')
-      : dispatch(addContact(newContact));
+    // return checkContact
+    //   ? alert('такое имя уже есть')
+    //   : dispatch(addContact(newContact));
   };
 
   const reset = () => {
