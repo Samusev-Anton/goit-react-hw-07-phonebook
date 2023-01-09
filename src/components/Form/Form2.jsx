@@ -1,15 +1,15 @@
 import React from 'react';
 import { InputStyle, Submit, FormBox, Input } from './Form.styled';
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-// import { addContact } from '../../redux/formSlice';
+import { useAddContactMutation, useGetContactsQuery } from 'redux/formSlice';
+import { Puff } from 'react-loader-spinner';
 
 const Form2 = () => {
+  const [addContact, { isLoading }] = useAddContactMutation();
+  // console.log(isLoading);
+  const { data } = useGetContactsQuery();
   const [user, setUser] = useState('');
   const [number, setNumber] = useState('');
-  // const dispatch = useDispatch();
-  const existContacts = useSelector(state => state.contacts);
 
   const handleInputChange = event => {
     // console.log(event.currentTarget.name);
@@ -30,24 +30,22 @@ const Form2 = () => {
   const handleSubmit = event => {
     event.preventDefault();
     const newContact = {
-      id: nanoid(),
       name: user,
-      number: number,
+      phone: number,
     };
+
     formSubmitHandler(newContact);
 
     reset();
   };
 
   const formSubmitHandler = newContact => {
-    const checkContact = existContacts.some(
+    const checkContact = data.some(
       existContact =>
         existContact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    // return checkContact
-    //   ? alert('такое имя уже есть')
-    //   : dispatch(addContact(newContact));
+    return checkContact ? alert('такое имя уже есть') : addContact(newContact);
   };
 
   const reset = () => {
@@ -85,7 +83,10 @@ const Form2 = () => {
           />
         </InputStyle>
 
-        <Submit type="submit">Add contacts</Submit>
+        <Submit type="submit" disabled={isLoading}>
+          {isLoading && <Puff height="25" width="25" color="#130b0b" />}
+          Add contacts
+        </Submit>
       </FormBox>
     </>
   );

@@ -42,3 +42,15 @@ export const Delete = styled(AiTwotoneDelete)`
     box-shadow: 5px 9px 20px rgba(0, 0, 0, 0.15);
   }
 `;
+
+export const Loader = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* position: absolute;
+  top: calc(75%);
+  left: calc(50% - 32px); */
+`;

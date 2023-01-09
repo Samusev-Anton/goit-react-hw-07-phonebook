@@ -6,7 +6,7 @@ import { Header, NanLinkBox, NavBtn, Nav, NavLink } from './AppBar.styled';
 export const AppBar = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
   return (
     <Header>
       <Nav>

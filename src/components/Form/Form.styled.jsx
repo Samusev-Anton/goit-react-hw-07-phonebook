@@ -11,8 +11,11 @@ export const InputStyle = styled.label`
 `;
 
 export const Submit = styled.button`
+  display: flex;
   margin: 0 auto;
-  display: block;
+  align-items: center;
+  gap: 10px;
+  /* display: block; */
   padding: 10px 25px;
   background-color: white;
   border-radius: 8px;
